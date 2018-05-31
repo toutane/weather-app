@@ -10,6 +10,7 @@ export default class Weather extends Component {
   constructor(props) {
     super(props);
     this.state = {
+      icon: "weather-partlycloudy",
       cityInput: "",
       countryInput: "",
       temperature: undefined,
@@ -33,7 +34,12 @@ export default class Weather extends Component {
           humidity: data.main.humidity,
           description: data.weather[0].description,
           error: ""
-        });
+        },
+        // // console.log(this.state.description)
+        // this.state.description == "broken clouds"
+        // ? this.setState({ icon: "weather-cloudy" })
+        // : null
+      );
       } else {
         this.setState({
           temperature: undefined,
@@ -53,14 +59,25 @@ export default class Weather extends Component {
         <View style={styles.logoContainer}>
         {
           this.state.city == undefined
-          ? <Text style={styles.title}>
-              Weather App&nbsp;
-              <MaterialCommunityIcons name="weather-partlycloudy" size={50} style={styles.logo} />
-            </Text>
+          ? <View>
+              <Text style={styles.title}>
+                Weather App&nbsp;
+                <MaterialCommunityIcons name="weather-partlycloudy" size={50} style={styles.logo} />
+              </Text>
+              <Text style={{ fontWeight: '100', color: '#FFF', fontSize: 25, top: 280, textAlign: 'center'}}>
+                Choose a city...
+              </Text>
+            </View>
           : <View>
              <Text style={styles.title}>
               {this.state.city}, {this.state.country}&nbsp;
-              <MaterialCommunityIcons name="weather-partlycloudy" size={50} style={styles.logo} />
+              {
+                this.state.description == "broken clouds"
+                ? <MaterialCommunityIcons name="weather-cloudy" size={50} style={styles.logo} />
+                :  this.state.description == "haze"
+                ? <MaterialCommunityIcons name="weather-fog" size={50} style={styles.logo} />
+                : <MaterialCommunityIcons name={this.state.icon} size={50} style={styles.logo} />
+                }
             </Text>
             <Value
               temperature={this.state.temperature} 
@@ -84,7 +101,7 @@ export default class Weather extends Component {
           <TextInput 
           placeholder="country..."
           placeholderTextColor="#ecf0f1"
-          returnKeyType="go"       
+          returnKeyType="next"       
           style={styles.input}
           onChangeText={(countryInput) => this.setState({countryInput})}
           value={this.state.countryInput}
