@@ -1,23 +1,80 @@
 import React, { Component } from 'react';
-import { StyleSheet, View, Text, Image, KeyboardAvoidingView } from 'react-native';
+import { StyleSheet, View, ListView, Text, KeyboardAvoidingView, TextInput, Keyboard, TouchableOpacity, } from 'react-native';
 import { Ionicons, MaterialCommunityIcons, Entypo, FontAwesome, MaterialIcons } from '@expo/vector-icons';
+import { createStackNavigator} from 'react-navigation';
 
-export default class Welcome extends Component {
+import Value from '../components/Value'
+
+class Welcome extends Component {
+
+  static navigationOptions = {
+    title: 'Weather App',
+    headerStyle: {
+        backgroundColor: '#8e44ad'
+    },
+    headerTitleStyle: {
+        color: '#FFF',
+        fontSize: 25
+    }
+  }
+
+  constructor(props) {
+    super(props);
+    this.state = {
+      cityInput: "",
+      countryInput: "",
+    };
+  }
+
+  submit() {
+    Keyboard.dismiss()
+    this.state.cityInput == ""
+    ? null
+    :     this.state.countryInput == ""
+    ? null
+    : this.props.navigation.navigate('Result', {city: this.state.cityInput, country: this.state.countryInput})
+  }
+  
   render() {
     return (
       <KeyboardAvoidingView behavior="padding" style={styles.container}>
         <View style={styles.logoContainer}>
-        <Text style={styles.title}>
-            Weather App&nbsp;
-            <MaterialCommunityIcons name="weather-partlycloudy" size={50} style={styles.logo} />
-          </Text>
         </View>
         <View style={styles.formContainer}>
+          <TextInput 
+          placeholder="city..."
+          placeholderTextColor="#ecf0f1"
+          returnKeyType="next"
+          style={styles.input}
+          onChangeText={(cityInput) => this.setState({cityInput})}
+          value={this.state.cityInput}
+          />
+          <TextInput 
+          placeholder="country..."
+          placeholderTextColor="#ecf0f1"
+          returnKeyType="go"       
+          onSubmitEditing={() => this.submit()}
+          style={styles.input}
+          onChangeText={(countryInput) => this.setState({countryInput})}
+          value={this.state.countryInput}
+          />
+        <TouchableOpacity style={styles.buttonContainer} onPress={() => this.submit()}>
+          <Text style={styles.buttonText}>GET WEATHER</Text>
+        </TouchableOpacity>
         </View>
       </KeyboardAvoidingView>
     );
   }
 }
+
+export default createStackNavigator ({
+  Search: {
+    screen: Welcome
+  },
+  Result: {
+    screen: Value
+  }
+})
 
 const styles = StyleSheet.create({
   container: {
@@ -27,7 +84,6 @@ const styles = StyleSheet.create({
   logoContainer: {
     alignItems: 'center',
     flexGrow: 1,
-    justifyContent: 'center'
   },
    logo: {
     color: '#FFF',
@@ -36,8 +92,31 @@ const styles = StyleSheet.create({
   },
   title: {
     color: 'white',
-    fontSize: 35,
-    fontWeight: 'bold'
-    
+    fontSize: 40,
+    fontWeight: 'bold',
+    top: 80
+  },
+  input: {
+    height: 40,
+    marginBottom: 20,
+    backgroundColor: '#8e44ad',
+    color: '#ecf0f1',
+    paddingHorizontal: 10,
+    borderRadius: 6,
+    fontSize: 18
+  },
+  buttonContainer: {
+    backgroundColor: '#8e44ad',
+    paddingVertical: 15
+  },
+  buttonText: {
+    textAlign: 'center',
+    color: '#FFF',
+    fontWeight: 'bold',
+    fontSize: 18
+
+  },
+  formContainer: {
+    padding: 20,
   },
 });
