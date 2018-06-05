@@ -10,7 +10,8 @@ class Welcome extends Component {
   static navigationOptions = {
     title: 'Weather App',
     headerStyle: {
-        backgroundColor: '#8e44ad'
+      backgroundColor: '#222f3e',
+      borderBottomColor: '#a4b0be'
     },
     headerTitleStyle: {
         color: '#FFF',
@@ -79,7 +80,7 @@ export default createStackNavigator ({
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#9b59b6'
+    backgroundColor: '#222f3e'
   },
   logoContainer: {
     alignItems: 'center',
@@ -99,14 +100,14 @@ const styles = StyleSheet.create({
   input: {
     height: 40,
     marginBottom: 20,
-    backgroundColor: '#8e44ad',
+    backgroundColor: '#34495e',
     color: '#ecf0f1',
     paddingHorizontal: 10,
     borderRadius: 6,
     fontSize: 18
   },
   buttonContainer: {
-    backgroundColor: '#8e44ad',
+    backgroundColor: '#34495e',
     paddingVertical: 15
   },
   buttonText: {

@@ -11,9 +11,10 @@ export default class Value extends Component {
   
   static navigationOptions = ({navigation}) => {
     return {
-    title: `Weather / ${navigation.state.params.city}`,
+    title: `${navigation.state.params.city} ${navigation.state.params.country}`,
     headerStyle: {
-        backgroundColor: '#8e44ad'
+        backgroundColor: '#222f3e',
+        borderBottomColor: '#a4b0be',
     },
     headerTitleStyle: {
         color: '#FFF',
@@ -48,7 +49,7 @@ export default class Value extends Component {
   render() {
     const ds = new ListView.DataSource({rowHasChanged: (r1, r2,) => r1 !== r2});
     return (
-     <View style={{flex: 1, backgroundColor: '#9b59b6'}}>
+     <View style={{flex: 1, backgroundColor: '#222f3e'}}>
         {this.state.weatherData === null
         ? <ActivityIndicator/>
         : <ListView

@@ -32,7 +32,7 @@ const Tabs =  createBottomTabNavigator(
       fontSize: 12,
     },
     style: {
-      backgroundColor: '#8e44ad',
+      backgroundColor: '#222f3e',
     },
   },
  } 

@@ -8,7 +8,8 @@ class Info extends Component {
   static navigationOptions = {
     title: 'About this app',
     headerStyle: {
-        backgroundColor: '#8e44ad'
+      backgroundColor: '#222f3e',
+      borderBottomColor: '#a4b0be'
     },
     headerTitleStyle: {
         color: '#FFF',
@@ -32,7 +33,7 @@ export default createStackNavigator ({
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#9b59b6'
+    backgroundColor: '#222f3e'
   },
   logoContainer: {
     alignItems: 'center',
