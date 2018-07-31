@@ -1,5 +1,5 @@
 # weather-app
-Simple native weather app made with openweathermap APIs
+Simple native weather app made with openweathermap APIs and React Native
 
 ## Install
 Clone this repo to your computer with the command:
